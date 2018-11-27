@@ -12,8 +12,9 @@ class ServiceLoadBalancer(BaseService):
         BaseService.__init__(self, uri=uri, service_name=service_name, threaded=threaded)
 
     def process(self, dictReq):
-        # ret = self.serviceCall("http://face-detect:5000/detect",dictReq) # call other microservice
-        ret = self.serviceCall("http://47.104.5.241:30001/detect",dictReq)
+        # todo 保存图片到某路径，拼接出公网url传递下去
+
+        ret = self.serviceCall(CONFIG.get("BACKEND_URL"),dictReq)
         # dictReq = {
         #  "type": "local/url",
         #  "path": "path"
@@ -22,5 +23,5 @@ class ServiceLoadBalancer(BaseService):
 
 if __name__ == "__main__":
 
-    ms = ServiceFace()
+    ms = ServiceLoadBalancer()
     ms.start()

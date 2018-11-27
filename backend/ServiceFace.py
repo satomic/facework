@@ -13,7 +13,7 @@ class ServiceFace(BaseService):
     TIMEOUT = 100
 
     def __init__(self, uri="/detect", service_name="detect"):
-        BaseService.__init__(self, uri=uri, service_name=service_name)
+        BaseService.__init__(self, uri=uri, service_name=service_name, ver = "v0.0.1",)
         self.api = API(API_KEY=CONFIG.get("API_KEY"), API_SECRET=CONFIG.get("API_SECRET"))
 
     def process(self, dictReq):
