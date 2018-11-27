@@ -8,8 +8,8 @@ class ServiceLoadBalancer(BaseService):
 
     TIMEOUT = 100
 
-    def __init__(self, uri="/loadbalacner", service_name="loadbalacner", threaded=True,):
-        BaseService.__init__(self, uri=uri, service_name=service_name, threaded=threaded)
+    def __init__(self, uri="/loadbalancer", service_name="loadbalancer", threaded=True,):
+        BaseService.__init__(self, uri=uri, service_name=service_name, threaded=threaded,  ver="v0.0.1")
 
     def process(self, dictReq):
         # todo 保存图片到某路径，拼接出公网url传递下去
