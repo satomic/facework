@@ -52,7 +52,7 @@ class  BaseService(object):
         # 这个是为特定的service所保留的一个测试入口，验证是否可用
         self.app.add_url_rule(self.uri+"/hello", "TestHello", self.testHello, methods=["GET"])
         logging.info("service starting with uri %s" % self.uri)
-        self.app.run(host=self.host, port=self.port, threaded=self.threaded)
+        self.app.run(host=self.host, port=self.port, threaded=self.threaded, debug=False)
 
     def testHello(self):
         return "hello via %s.\n(if you see this, means your service is avaiable)\n" % self.uri
