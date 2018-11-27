@@ -21,7 +21,7 @@ class  BaseService(object):
     TIMEOUT = 100
     def __init__(self,
                         uri,
-                        serviceName = None,
+                        service_name = None,
                         ver = "1.0.0",
                         host = "0.0.0.0",
                         port = 5000,
@@ -33,8 +33,8 @@ class  BaseService(object):
         self.uri = uri
         self.serviceVer = ver
         self.threaded = threaded
-        if serviceName:
-            self.serviceName = serviceName
+        if service_name:
+            self.serviceName = service_name
         else:
             self.serviceName = os.path.basename(os.path.normcase(uri)).lower()
 

@@ -26,8 +26,8 @@ __all__ = ['File', 'APIError', 'API']
 DEBUG_LEVEL = 1
 
 # 添加API Key API Secret
-API_KEY = "B1eul1h0WJNC5GfPzBu9Nc-VS8pQKpNX"
-API_SECRET = "g0N3RcCQR4HwlQbEcJY__SNkTDQ4jFik"
+# API_KEY = "B1eul1h0WJNC5GfPzBu9Nc-VS8pQKpNX"
+# API_SECRET = "g0N3RcCQR4HwlQbEcJY__SNkTDQ4jFik"
 
 
 class File(object):
@@ -84,7 +84,9 @@ class API(object):
     max_retries = None
     retry_delay = None
 
-    def __init__(self):
+    def __init__(self, API_KEY="B1eul1h0WJNC5GfPzBu9Nc-VS8pQKpNX",
+                       API_SECRET="g0N3RcCQR4HwlQbEcJY__SNkTDQ4jFik",
+                       return_attributes="gender,age,smiling," "emotion,ethnicity,beauty," "skinstatus"):
         """
         :param srv: The API server address
         :param decode_result: whether to json_decode the result
@@ -121,6 +123,16 @@ class API(object):
         server"""
         pass
 
+    def beauty(self, dictReq, return_attributes="gender,age,smiling,"
+                                                "emotion,ethnicity,beauty,"
+                                                "skinstatus"):
+        if dictReq.get("type") == "url":
+            ret = self.detect(image_url=dictReq.get("path"),return_attributes=return_attributes)
+        elif dictReq.get("type") == "local":
+            ret = self.detect(image_file=File(dictReq.get("path")),return_attributes=return_attributes)
+        else:
+            return "dictReq has no key: type, input is illegal"
+        return ret
 
 def _setup_apiobj(self, api, prefix, path):
     if self is not api:

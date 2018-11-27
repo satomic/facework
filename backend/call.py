@@ -9,6 +9,7 @@ from PythonSDK.facepp import API,File
 # 导入图片处理类
 import PythonSDK.ImagePro
 
+from backend.config import CONFIG
 
 # 此方法专用来打印api返回的信息
 def print_result(hit, result):
@@ -19,10 +20,10 @@ def printFuctionTitle(title):
     return "\n"+"-"*60+title+"-"*60;
 
 # 初始化对象，进行api的调用工作
-api = API()
+api = API(API_KEY=CONFIG.get("API_KEY"), API_SECRET=CONFIG.get("API_SECRET"))
 # -----------------------------------------------------------人脸识别部分-------------------------------------------
 
-faceSet_img = 'demo5.jpg'       # 用于创建faceSet
+faceSet_img = 'demo3.jpg'       # 用于创建faceSet
 # 人脸检测：https://console.faceplusplus.com.cn/documents/4888373
 # res = api.detect(image_url=detech_img_url, return_attributes="gender,age,smiling,headpose,facequality,"
 res = api.detect(image_file=File(faceSet_img), return_attributes="gender,age,smiling,"
