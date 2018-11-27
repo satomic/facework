@@ -2,7 +2,11 @@
 
 from MicroService.Service import BaseService
 from PythonSDK.facepp import API,File
-from backend.config import CONFIG
+import os
+if os.path.exists("./backend"):
+    from backend.config import CONFIG
+else:
+    from config import CONFIG
 
 class ServiceFace(BaseService):
 
