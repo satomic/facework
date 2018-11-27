@@ -10,10 +10,6 @@ from PythonSDK.facepp import API,File
 import PythonSDK.ImagePro
 
 
-
-
-
-
 # 此方法专用来打印api返回的信息
 def print_result(hit, result):
     print(hit)
