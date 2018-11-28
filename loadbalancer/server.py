@@ -43,6 +43,8 @@ def formate_detect_ret(detect_result):
     print type(detect_result),detect_result
     ret = ""
     face_counter = 0
+    if not detect_result.has_key("faces"):
+        return u"没检测到人脸"
     for face in detect_result["faces"]:
         ret = ret + u"-------------------<br>年龄: %s<br>性别: %s<br>女人眼中颜值: %s<br>男人眼中颜值: %s<br> " % (
             face["attributes"]["age"]["value"],
@@ -109,7 +111,7 @@ def index():
     return u"""
     <!doctype html>
     <title>颜值检测</title>
-    <h1>选择需要检测的图片(最多5张脸)</h1>
+    <h1>选择需要检测的图片(最多5张脸，仅支持jpg格式)</h1>
     <form action="" method=post enctype=multipart/form-data>
       <p><input type=file name=file>
          <input type=submit value=检测>
