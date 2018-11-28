@@ -42,6 +42,7 @@ def formate_detect_ret(detect_result):
     # detect_result = eval(detect_result)
     print type(detect_result),detect_result
     ret = ""
+    face_counter = 0
     for face in detect_result["faces"]:
         ret = ret + u"-------------------<br>年龄: %s<br>性别: %s<br>女人眼中颜值: %s<br>男人眼中颜值: %s<br> " % (
             face["attributes"]["age"]["value"],
@@ -49,6 +50,9 @@ def formate_detect_ret(detect_result):
             face["attributes"]["beauty"]["female_score"],
             face["attributes"]["beauty"]["male_score"]
         )
+        face_counter += 1
+        if face_counter == 5:
+            break
     print "ret: ", ret
     return ret
 
