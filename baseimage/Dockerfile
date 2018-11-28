@@ -1,7 +1,7 @@
 FROM satomic/python:flask
 WORKDIR /usr/src/
-COPY loadbalancer .
+COPY backend .
 COPY MicroService MicroService
 COPY PythonSDK PythonSDK
 EXPOSE 5000
-CMD ["python","./server.py"]
+CMD ["python","./ServiceFace.py"]
