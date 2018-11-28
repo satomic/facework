@@ -116,7 +116,7 @@ def index():
     </form>
     <img src="%s" />
     <p>%s</p><br>
-    """ % (image_path, formate_detect_ret(ret_detect))
+    """ % (str(image_path), formate_detect_ret(ret_detect))
     # """ % ("<br>".join(os.listdir(app.config['UPLOAD_FOLDER'],)), ret_detect)
 
 if __name__ == "__main__":
