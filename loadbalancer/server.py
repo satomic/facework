@@ -62,7 +62,9 @@ def index():
         file = request.files['file']
         if file and allowed_file(file.filename):
             filename = "%s_%s_%s" % (current_time(), uuid.uuid1(),secure_filename(file.filename))
-            filename = filename.replace(" ","_")
+            filename = filename[:-4] + ".jpg"
+            print "filename:", filename
+            filename = filename.replace(' ','_')
             print "filename:", filename
             # filename = file.filename
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
