@@ -52,8 +52,9 @@ def formate_detect_ret(detect_result):
     print "ret: ", ret
     return ret
 
-global ret_detect
+global ret_detect, image_path
 ret_detect = ""
+image_path = ""
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
