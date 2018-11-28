@@ -60,6 +60,19 @@ global ret_detect, image_path
 ret_detect = ""
 image_path = ""
 
+@app.route("/check", methods=['GET', 'POST'])
+def check():
+    image_show_html = ""
+    for image_name in os.listdir(app.config['UPLOAD_FOLDER']):
+        image_show_html += '''<img src="http://47.104.5.241:30080/images/%s" /><br>''' % image_name
+
+    return """
+    <!doctype html>
+    <title>图片检查</title>
+    <h1>已有图片列表</h1>
+    %s
+    """ % image_show_html
+
 @app.route("/", methods=['GET', 'POST'])
 def index():
 
@@ -95,11 +108,11 @@ def index():
     print "ret_detect global: ", ret_detect
     return """
     <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
+    <title>颜值检测</title>
+    <h1>选择需要检测的图片(最多5张脸)</h1>
     <form action="" method=post enctype=multipart/form-data>
       <p><input type=file name=file>
-         <input type=submit value=Upload>
+         <input type=submit value=检测>
     </form>
     <img src="%s" />
     <p>%s</p><br>
