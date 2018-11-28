@@ -106,7 +106,7 @@ def index():
 
     global ret_detect, image_path
     print "ret_detect global: ", ret_detect
-    return """
+    return u"""
     <!doctype html>
     <title>颜值检测</title>
     <h1>选择需要检测的图片(最多5张脸)</h1>
@@ -116,7 +116,7 @@ def index():
     </form>
     <img src="%s" />
     <p>%s</p><br>
-    """ % (str(image_path), formate_detect_ret(ret_detect))
+    """ % image_path, formate_detect_ret(ret_detect))
     # """ % ("<br>".join(os.listdir(app.config['UPLOAD_FOLDER'],)), ret_detect)
 
 if __name__ == "__main__":
