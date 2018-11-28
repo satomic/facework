@@ -26,7 +26,7 @@ def current_time():
     return datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S_%f')[:-3]
 
 
-def detectCall(serviceUri, dictRequest, timeout=5):
+def detectCall(serviceUri, dictRequest, timeout=30):
     # 0 input check
     if not isinstance(dictRequest, dict):
         return (500, {"error": "error in client input"})
