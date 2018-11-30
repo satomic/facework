@@ -1,54 +1,70 @@
+import { $init, $digest } from '../../utils/common.util'
+
 //index.js
 //获取应用实例
 const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    imgUrls: [
+      '/images/swiper_wjk.jpg',
+      '/images/swiper_wy.jpg',
+      '/images/swiper_yyqx.jpg',
+    ],
+    //是否采用衔接滑动  
+    circular: true,
+    //是否显示画板指示点  
+    indicatorDots: true,
+    //选中点的颜色  
+    indicatorcolor: "#ccc",
+    //是否竖直  
+    vertical: false,
+    //是否自动切换  
+    autoplay: true,
+    //自动切换的间隔
+    interval: 3000,
+    //滑动动画时长毫秒  
+    duration: 1000,
+
+    images: []
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  goToBattle: function(){
+    wx: wx.navigateTo({
+      url: '../battle/battle',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+
+  // 选择图片及预览
+  onLoad(options) {
+    $init(this)
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  chooseImage(e) {
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'],  //可选择原图或压缩后的图片
+      sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
+      success: res => {
+        const images = this.data.images.concat(res.tempFilePaths)
+        // 限制最多只能留下3张照片
+        this.data.images = images.length <= 3 ? images : images.slice(0, 3)
+        $digest(this)
+      }
+    })
+  },
+  removeImage(e) {
+    const idx = e.target.dataset.idx
+    this.data.images.splice(idx, 1)
+    $digest(this)
+  },
+
+  handleImagePreview(e) {
+    const idx = e.target.dataset.idx
+    const images = this.data.images
+    wx.previewImage({
+      current: images[idx],  //当前预览的图片
+      urls: images,  //所有要预览的图片
     })
   }
 })

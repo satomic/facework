@@ -1,0 +1,11 @@
+<!--pages/battle/battle.wxml-->
+<view class='preview'>
+  <view class='preview-title'>预览图</view>
+  <view class='preview-image'></view>
+</view>
+<view>
+<button
+    type="default" size="mini" bindtap="chooseImage" 
+    wx:if="{{images.length < 3}}"
+>添加图片</button>
+</view>
